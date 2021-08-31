@@ -1,0 +1,1 @@
+Calculator for The Odin Project using JS, HTML and CSS. Final project of foundations course. 
