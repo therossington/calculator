@@ -1,0 +1,14 @@
+button {
+    cursor: pointer;
+    padding: 20px;
+}
+
+.keypad {
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(4, 25px);
+    grid-template-rows: repeat(4, 25px);
+    row-gap: 30px;
+    column-gap: 30px;
+}
+
