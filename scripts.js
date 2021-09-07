@@ -1,6 +1,29 @@
-let operator = '*';
-let firstInput = 5;
-let secondInput = 10;
+const button = document.querySelectorAll('button');
+const display = document.getElementById('content');
+let inputArray = [];
+
+//Evaluates each click for entry.
+
+let numOperations = '';
+
+button.forEach(button => button.addEventListener('click', () => {
+    if (button.id == 'clear') {
+            display.innerHTML = '';
+            display.textContent = '0';
+            inputArray = [];
+     } else if (button.id != 'clear') {
+            inputArray.push(button.textContent);
+            display.textContent = inputArray.join('');
+            return console.log(inputArray.join(''));
+     }
+    }
+)       
+);
+
+let operator = '';
+let firstInput = inputArray;
+let secondInput = inputArray;
+
 
 function add(firstInput,secondInput) {
     return firstInput + secondInput;
