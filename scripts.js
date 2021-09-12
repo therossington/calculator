@@ -2,6 +2,8 @@ const calculator = document.querySelector('.calculator');
 const keypad = document.querySelector('.keypad');
 const display = document.getElementById('content');
 
+//Checks what user inputs - for testing.
+
 keypad.addEventListener('click', (e) => {
     if (e.target.matches('button')) {
         const key = e.target;
@@ -24,6 +26,8 @@ keypad.addEventListener('click', (e) => {
         };
     };
 });
+
+//Number display - how append non-zero and decimals to the display.
 
 keypad.addEventListener('click', (e) => {
     if (e.target.matches('button')) {
