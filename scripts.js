@@ -1,65 +1,43 @@
-const operatorInput = document.querySelectorAll('.operators');
-const numberInput = document.querySelectorAll('.numbers');
-const equals = document.getElementById('equals');
-const clear = document.getElementById('clear');
+const calculator = document.querySelector('.calculator');
+const keypad = document.querySelector('.keypad');
 const display = document.getElementById('content');
-let inputArray = [];
-let operator = '';
-let firstInput = '';
-let secondInput = '';
 
-//Collects number input.
+keypad.addEventListener('click', (e) => {
+    if (e.target.matches('button')) {
+        const key = e.target;
+        const action = key.dataset.action;
+        if (!action) {
+            console.log('number key');
+        } else if (
+            action === 'addition' ||
+            action === 'subtract' ||
+            action === 'multiply' ||
+            action === 'divide'
+        ) {
+            console.log('operator key');
+        } else if (action === 'decimal') {
+            console.log('decimal key');
+        } else if (action === 'clear') {
+            console.log('clear key');
+        } else if (action === 'equals') {
+            console.log('equals key');
+        };
+    };
+});
 
-numberInput.forEach(numberInput => numberInput.addEventListener('click', () => {
-    inputArray.push(numberInput.textContent);
-    display.textContent = inputArray.join('');
-    if (operator == '') {
-        firstInput = inputArray.join('');
-    } else if (operator != '') {
-        secondInput = inputArray.join('');
-    }
-}));
-
-//Triggers clear actions.
-
-clear.addEventListener('click', () => {
-    display.innerHTML = '';
-    display.textContent = '0';
-    inputArray = [];
-    operator = '';
-})
-
-//Selects operator.
-
-operatorInput.forEach(operatorInput => operatorInput.addEventListener('click', (e) => {
-    operator = e.target.id; 
-    inputArray = [];
-}));
-
-function add(firstInput,secondInput) {
-    return parseInt(firstInput) + parseInt(secondInput);
-}
-
-function subtract(firstInput, secondInput) {
-    return firstInput - secondInput;
-}
-
-function multiply(firstInput, secondInput) {
-    return firstInput * secondInput;
-}
-
-function divide(firstInput, secondInput) {
-    return firstInput / secondInput;
-}
-
-function operate() {
-    if (operator === 'multiply') {
-        return add(firstInput, secondInput);
-    } else if (operator === 'subtract') {
-        return subtract(firstInput, secondInput);
-} else if (operator === 'multiply') {
-        return multiply(firstInput, secondInput);
-} else if (operator === 'divide') {
-        return divide(firstInput, secondInput);
-} else return 'ERROR!';
-}
+keypad.addEventListener('click', (e) => {
+    if (e.target.matches('button')) {
+        const key = e.target;
+        const action = key.dataset.action;
+        const content = key.textContent;
+        const number = display.textContent;
+        if (!action) {
+            if (number === '0') {
+                display.textContent = content;
+            } else {
+                display.textContent = number + content;
+        }} else if (action === 'decimal') {
+            display.textContent = number + '.';
+        };
+    };
+});
