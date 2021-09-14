@@ -7,6 +7,7 @@ let inputArray = [];
 let operator = '';
 let firstInput = '';
 let secondInput = '';
+let result = '';
 
 //Collects number input.
 
@@ -17,6 +18,10 @@ numberInput.forEach(numberInput => numberInput.addEventListener('click', () => {
         firstInput = inputArray.join('');
     } else if (operator != '') {
         secondInput = inputArray.join('');
+        operate(firstInput, secondInput);
+        console.log("Result " + operate(firstInput, secondInput));
+        console.log(firstInput);
+        console.log(secondInput);
     }
 }));
 
@@ -34,26 +39,27 @@ clear.addEventListener('click', () => {
 operatorInput.forEach(operatorInput => operatorInput.addEventListener('click', (e) => {
     operator = e.target.id; 
     inputArray = [];
+    console.log(operator);
 }));
 
-function add(firstInput,secondInput) {
-    return parseInt(firstInput) + parseInt(secondInput);
+function add(a, b) {
+    return parseFloat(a) + parseFloat(b);
 }
 
-function subtract(firstInput, secondInput) {
-    return firstInput - secondInput;
+function subtract(a, b) {
+    return a - b;
 }
 
-function multiply(firstInput, secondInput) {
-    return firstInput * secondInput;
+function multiply(a, b) {
+    return a * b;
 }
 
-function divide(firstInput, secondInput) {
-    return firstInput / secondInput;
+function divide(a, b) {
+    return a / b;
 }
 
 function operate() {
-    if (operator === 'multiply') {
+    if (operator === 'addition') {
         return add(firstInput, secondInput);
     } else if (operator === 'subtract') {
         return subtract(firstInput, secondInput);
