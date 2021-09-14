@@ -1,58 +1,65 @@
-const numberSelect = document.querySelectorAll('.numbers');
-const operatorSelect = document.querySelectorAll('.operators');
-const equalsSelect = document.getElementById('equals');
-const clearSelect = document.getElementById('clear');
-const previousOperandDisplay = document.getElementById('previous-operand');
-const currentOperandDisplay = document.getElementById('current-operand');
+const operatorInput = document.querySelectorAll('.operators');
+const numberInput = document.querySelectorAll('.numbers');
+const equals = document.getElementById('equals');
+const clear = document.getElementById('clear');
+const display = document.getElementById('content');
+let inputArray = [];
+let operator = '';
+let firstInput = '';
+let secondInput = '';
 
-class Calculator {
-    constructor(previousOperandDisplay, currentOperantDisplay) {
-        this.previousOperandDisplay = previousOperandDisplay;
-        this.currentOperantDisplay = currentOperantDisplay;
-        this.clear();
-    };
-};
+//Collects number input.
 
-const calculator = new Calculator(previousOperandDisplay, currentOperandDisplay);
+numberInput.forEach(numberInput => numberInput.addEventListener('click', () => {
+    inputArray.push(numberInput.textContent);
+    display.textContent = inputArray.join('');
+    if (operator == '') {
+        firstInput = inputArray.join('');
+    } else if (operator != '') {
+        secondInput = inputArray.join('');
+    }
+}));
 
-function clear() {
-    this.currentOperand = '';
-    this.previousOperand = '';
-    this.operation = '';
+//Triggers clear actions.
+
+clear.addEventListener('click', () => {
+    display.innerHTML = '';
+    display.textContent = '0';
+    inputArray = [];
+    operator = '';
+})
+
+//Selects operator.
+
+operatorInput.forEach(operatorInput => operatorInput.addEventListener('click', (e) => {
+    operator = e.target.id; 
+    inputArray = [];
+}));
+
+function add(firstInput,secondInput) {
+    return parseInt(firstInput) + parseInt(secondInput);
 }
 
-numberSelect.forEach(button => {
-    button.addEventListener('click', () => {
-        calculator.appendNumber(button.textContent);
-        calculator.updateDisplay();
-    })
-});
+function subtract(firstInput, secondInput) {
+    return firstInput - secondInput;
+}
 
-operatorSelect.forEach(button => {
-    button.addEventListener('click', () => {
-        calculator.chooseOperation(button.textContent);
-        calculator.updateDisplay();
-    });
-});
+function multiply(firstInput, secondInput) {
+    return firstInput * secondInput;
+}
 
-function backspace() {
-
-};
-
-function appendNumber(number) {
-    if (number === '.' && this.currentOperand.includes('.')) {
-        return this.currentOperand = this.currentOperand.toString() + number.toString();
-    };
-};
-
-function chooseOperation(a) {
-
-};
+function divide(firstInput, secondInput) {
+    return firstInput / secondInput;
+}
 
 function operate() {
-
-};
-
-function updateDisplay() {
-    this.currentOperandDisplay.textContent = this.currentOperand;
-};
+    if (operator === 'multiply') {
+        return add(firstInput, secondInput);
+    } else if (operator === 'subtract') {
+        return subtract(firstInput, secondInput);
+} else if (operator === 'multiply') {
+        return multiply(firstInput, secondInput);
+} else if (operator === 'divide') {
+        return divide(firstInput, secondInput);
+} else return 'ERROR!';
+}
