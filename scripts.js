@@ -16,12 +16,16 @@ numberInput.forEach(numberInput => numberInput.addEventListener('click', () => {
     display.textContent = inputArray.join('');
     if (operator == '') {
         firstInput = inputArray.join('');
-    } else if (operator != '') {
+        console.log("First input = "+firstInput);
+    } else if (operator != ''&& result == '') {
         secondInput = inputArray.join('');
-        operate(firstInput, secondInput);
-        console.log("Result " + operate(firstInput, secondInput));
-        console.log(firstInput);
-        console.log(secondInput);
+        operate(firstInput, secondInput);       
+        console.log("Second input = "+secondInput);
+    } else if (operator != '' && result != '') {
+        firstInput = result;
+        secondInput = inputArray.join('');
+        console.log("First input = "+firstInput);
+        console.log("Second input = "+secondInput);
     }
 }));
 
@@ -31,8 +35,11 @@ clear.addEventListener('click', () => {
     display.innerHTML = '';
     display.textContent = '0';
     inputArray = [];
+    firstInput = '';
+    secondInput = '';
     operator = '';
-})
+    result = '';
+});
 
 //Selects operator.
 
@@ -40,22 +47,30 @@ operatorInput.forEach(operatorInput => operatorInput.addEventListener('click', (
     operator = e.target.id; 
     inputArray = [];
     console.log(operator);
+    if (secondInput != '') {
+        operate(firstInput, secondInput);
+        console.log("Result = " + result);
+    }
 }));
 
 function add(a, b) {
-    return parseFloat(a) + parseFloat(b);
+    result = parseFloat(a) + parseFloat(b);
+    return result;
 }
 
 function subtract(a, b) {
-    return a - b;
+    result = parseFloat(a) - parseFloat(b);
+    return result;
 }
 
 function multiply(a, b) {
-    return a * b;
+    result = parseFloat(a) * parseFloat(b);
+    return result;
 }
 
 function divide(a, b) {
-    return a / b;
+    result =  parseFloat(a) / parseFloat(b);
+    return result;
 }
 
 function operate() {
@@ -69,3 +84,8 @@ function operate() {
         return divide(firstInput, secondInput);
 } else return 'ERROR!';
 }
+
+equals.addEventListener('click', (e) => {
+    return console.log(result + e.target.id);
+})
+
