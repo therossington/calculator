@@ -15,11 +15,12 @@ numberInput.forEach(numberInput => numberInput.addEventListener('click', () => {
     inputArray.push(numberInput.textContent);
     display.textContent = inputArray.join('');
     if (operator == '') {
+        result = '';
         firstInput = inputArray.join('');
         console.log("First input = "+firstInput);
-    } else if (operator != ''&& result == '') {
+    } else if (operator != '' && result == '') {
         secondInput = inputArray.join('');
-        operate(firstInput, secondInput);       
+        // operate(firstInput, secondInput);       
         console.log("Second input = "+secondInput);
     } else if (operator != '' && result != '') {
         firstInput = result;
@@ -28,6 +29,11 @@ numberInput.forEach(numberInput => numberInput.addEventListener('click', () => {
         console.log("Second input = "+secondInput);
     }
 }));
+
+equals.addEventListener('click', (e) => {
+    display.textContent = result;
+    return console.log(result + e.target.id);
+});
 
 //Triggers clear actions.
 
@@ -50,6 +56,7 @@ operatorInput.forEach(operatorInput => operatorInput.addEventListener('click', (
     if (secondInput != '') {
         operate(firstInput, secondInput);
         console.log("Result = " + result);
+        display.textContent = result;
     }
 }));
 
@@ -87,5 +94,5 @@ function operate() {
 
 equals.addEventListener('click', (e) => {
     return console.log(result + e.target.id);
-})
+});
 
