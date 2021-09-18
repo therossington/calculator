@@ -1,3 +1,5 @@
+"use strict";
+
 const operatorInput = document.querySelectorAll('.operators');
 const numberInput = document.querySelectorAll('.numbers');
 const equals = document.getElementById('equals');
@@ -30,7 +32,7 @@ numberInput.forEach(numberInput => numberInput.addEventListener('click', () => {
 }));
 
 equals.addEventListener('click', (e) => {
-    operate(firstInput, secondInput, operator);
+    operate();
     display.textContent = result;
     inputArray = [];
     return console.log(result + e.target.id);
@@ -54,16 +56,13 @@ operatorInput.forEach(operatorInput => operatorInput.addEventListener('click', (
     operator = e.target.id; // Check this - something not right
     inputArray = [];
     console.log(operator);
-    if (firstInput != '' && secondInput != '') {
-        operate(firstInput, secondInput, operator);
-        console.log("Result = " + result);
-        display.textContent = result;
-    }
+    operate();
+    console.log("Result = " + result);
+    display.textContent = result;
 }));
 
-/* function add(a, b) {
+function add(a, b) {
     result = parseFloat(a) + parseFloat(b);
-    return result;
 }
 
 function subtract(a, b) {
@@ -76,26 +75,10 @@ function multiply(a, b) {
 
 function divide(a, b) {
     result =  parseFloat(a) / parseFloat(b);
-} */
+}
 
-function operate(firstInput, secondInput, operator) {
-    switch(operator) {
-        case 'addition':
-            result = parseFloat(firstInput) + parseFloat(secondInput);
-            break;
-        case 'subtract':
-            result = parseFloat(firstInput) - parseFloat(secondInput);
-            break;
-        case 'multiply':
-            result = parseFloat(firstInput) * parseFloat(secondInput);
-            break;
-        case 'divide':
-            result = parseFloat(firstInput) / parseFloat(secondInput);
-            break;
-    };
-};
-           
-    /* if (operator === 'addition') {
+function operate() {
+    if (operator === 'addition') {
         result = parseFloat(firstInput) + parseFloat(secondInput);
         return result;
     } else if (operator === 'subtract') {
@@ -108,4 +91,4 @@ function operate(firstInput, secondInput, operator) {
          result = parseFloat(firstInput) / parseFloat(secondInput);
          return result;
     } else return 'ERROR!';
-    } */
+};
