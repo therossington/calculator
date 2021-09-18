@@ -59,6 +59,7 @@ h1 {
 }
 
 .screen {
+    border: solid 2px black;
     border-radius: 5px;
     background-color: #A9A9A9;
     font-size: 60px;
