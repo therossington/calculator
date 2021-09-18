@@ -7,7 +7,6 @@ let inputArray = [];
 let operator = '';
 let firstInput = '';
 let secondInput = '';
-let previousResult = '';
 let result = '';
 
 //Collects number input.
@@ -23,7 +22,7 @@ numberInput.forEach(numberInput => numberInput.addEventListener('click', () => {
         secondInput = inputArray.join('');
         console.log("Second input = "+secondInput);
     } else if (operator != '' && result != '') {
-        firstInput = previousResult;
+        firstInput = result;
         secondInput = inputArray.join('');
         console.log("First input = "+firstInput);
         console.log("Second input = "+secondInput);
@@ -31,7 +30,7 @@ numberInput.forEach(numberInput => numberInput.addEventListener('click', () => {
 }));
 
 equals.addEventListener('click', (e) => {
-    operate();
+    operate(firstInput, secondInput, operator);
     display.textContent = result;
     inputArray = [];
     return console.log(result + e.target.id);
@@ -52,11 +51,11 @@ clear.addEventListener('click', () => {
 //Selects operator.
 
 operatorInput.forEach(operatorInput => operatorInput.addEventListener('click', (e) => {
-    operator = e.target.id; 
+    operator = e.target.id; // Check this - something not right
     inputArray = [];
     console.log(operator);
-    if (secondInput != '') {
-        operate();
+    if (firstInput != '' && secondInput != '') {
+        operate(firstInput, secondInput, operator);
         console.log("Result = " + result);
         display.textContent = result;
     }
@@ -79,23 +78,19 @@ function divide(a, b) {
     result =  parseFloat(a) / parseFloat(b);
 } */
 
-function operate() {
+function operate(firstInput, secondInput, operator) {
     switch(operator) {
         case 'addition':
             result = parseFloat(firstInput) + parseFloat(secondInput);
-            //previousResult = result;
             break;
         case 'subtract':
             result = parseFloat(firstInput) - parseFloat(secondInput);
-            //previousResult = result;
             break;
         case 'multiply':
             result = parseFloat(firstInput) * parseFloat(secondInput);
-            //previousResult = result;
             break;
         case 'divide':
             result = parseFloat(firstInput) / parseFloat(secondInput);
-            //previousResult = result;
             break;
     };
 };
