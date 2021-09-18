@@ -1,3 +1,6 @@
+/* Need to create previousOperator and currentOperator function that evalues 
+previous operator and doesn't drop new operator until next button is hit. */
+
 "use strict";
 
 const operatorInput = document.querySelectorAll('.operators');
@@ -19,15 +22,11 @@ numberInput.forEach(numberInput => numberInput.addEventListener('click', () => {
     if (operator == '') {
         result = '';
         firstInput = inputArray.join('');
-        console.log("First input = "+firstInput);
     } else if (operator != '' && result == '') {
         secondInput = inputArray.join('');
-        console.log("Second input = "+secondInput);
     } else if (operator != '' && result != '') {
         firstInput = result;
         secondInput = inputArray.join('');
-        console.log("First input = "+firstInput);
-        console.log("Second input = "+secondInput);
     }
 }));
 
@@ -35,7 +34,7 @@ equals.addEventListener('click', (e) => {
     operate();
     display.textContent = result;
     inputArray = [];
-    return console.log(result + e.target.id);
+    console.log("1st in - ",firstInput,"2nd in - ", secondInput,"Operator - ", operator);
 });
 
 //Triggers clear actions.
@@ -55,10 +54,13 @@ clear.addEventListener('click', () => {
 operatorInput.forEach(operatorInput => operatorInput.addEventListener('click', (e) => {
     operator = e.target.id; // Check this - something not right
     inputArray = [];
-    console.log(operator);
-    operate();
-    console.log("Result = " + result);
-    display.textContent = result;
+    if (secondInput != '') {
+        operate();
+        console.log("1st in - ",firstInput,"2nd in - ", secondInput,"Operator - ", operator);
+        display.textContent = result;
+        firstInput = '';
+        secondInput = '';
+    };
 }));
 
 function add(a, b) {
