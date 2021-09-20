@@ -1,8 +1,3 @@
-/* Need to create previousOperator and currentOperator function that evalues 
-previous operator and doesn't drop new operator until next button is hit. */
-
-"use strict";
-
 const operatorInput = document.querySelectorAll('.operators');
 const numberInput = document.querySelectorAll('.numbers');
 const equals = document.getElementById('equals');
@@ -14,30 +9,32 @@ let firstInput = '';
 let secondInput = '';
 let result = '';
 
-//Collects number input.
-
 numberInput.forEach(numberInput => numberInput.addEventListener('click', () => {
     inputArray.push(numberInput.textContent);
     display.textContent = inputArray.join('');
+    if (display.textContent > 8) display.textContent = display.textContent.substring(0,8);
     if (operator == '') {
         result = '';
-        firstInput = inputArray.join('');
+        firstInput = display.textContent;
     } else if (operator != '' && result == '') {
-        secondInput = inputArray.join('');
+        secondInput = display.textContent;
     } else if (operator != '' && result != '') {
         firstInput = result;
-        secondInput = inputArray.join('');
+        secondInput = display.textContent;
     }
 }));
 
 equals.addEventListener('click', (e) => {
     operate();
-    display.textContent = result;
+    display.textContent = Math.round(result);
     inputArray = [];
-    console.log("1st in - ",firstInput,"2nd in - ", secondInput,"Operator - ", operator);
+    if (firstInput == '' && secondInput == '') {
+        display.textContent = 0;
+    } else if (firstInput != '' && secondInput == '') {
+        display.textContent = firstInput;
+    }
 });
 
-//Triggers clear actions.
 
 clear.addEventListener('click', () => {
     display.innerHTML = '';
@@ -49,18 +46,16 @@ clear.addEventListener('click', () => {
     result = '';
 });
 
-//Selects operator.
 
 operatorInput.forEach(operatorInput => operatorInput.addEventListener('click', (e) => {
-    operator = e.target.id; // Check this - something not right
     inputArray = [];
     if (secondInput != '') {
         operate();
-        console.log("1st in - ",firstInput,"2nd in - ", secondInput,"Operator - ", operator);
-        display.textContent = result;
+        display.textContent = Math.round(result);
         firstInput = '';
         secondInput = '';
     };
+    operator = e.target.id;
 }));
 
 function add(a, b) {
@@ -81,8 +76,8 @@ function divide(a, b) {
 
 function operate() {
     if (operator === 'addition') {
-        result = parseFloat(firstInput) + parseFloat(secondInput);
-        return result;
+        result = parseFloat(firstInput) + parseFloat(secondInput)
+        return result
     } else if (operator === 'subtract') {
         result = parseFloat(firstInput) - parseFloat(secondInput);
         return result;
@@ -90,7 +85,7 @@ function operate() {
         result = parseFloat(firstInput) * parseFloat(secondInput);
         return result;
     } else if (operator === 'divide') {
-         result = parseFloat(firstInput) / parseFloat(secondInput);
+         result = parseFloat(firstInput) / parseFloat(secondInput)
          return result;
     } else return 'ERROR!';
 };
